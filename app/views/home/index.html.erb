@@ -1,0 +1,198 @@
+
+<div class="row main">
+        
+    <% if @company %>
+        <div class="col-md-12 main ditta">
+
+            <h2 class="page-header">
+                Profilo della Impresa
+                <span id="button_container" class="pull-right" >
+                    <div class="btn-group edit_buttons" role="group">
+                        <button type="button" class="btn btn-danger" onclick="modificaDittaAnnulla()">
+                            <i class="fa fa-times" aria-hidden="true"></i> Annulla
+                        </button>
+                        <button type="button" class="btn btn-success" onclick="modificaDittaSalva()">
+                            <i class="fa fa-check" aria-hidden="true"></i> Salva
+                        </button>
+                    </div>
+                    <button type="button" class="btn btn-default home_button" onclick="modificaDitta()">
+                        <i class="fa fa-pencil" aria-hidden="true"></i> Modifica
+                    </button>
+                </span>
+            </h2>
+
+            <div class="row" id="page_container">
+
+                <div class="col-md-12" id="DittaContainer" >
+
+                    <div class="media" id="contenitore_ditta">
+                        <div class="media-left col-md-3 col-xs-12" id="contenitoreImmagine">
+                            <img class="media-object" src="<%= @company.logo %>" style="width: 150px; height:auto;" id="immagine_ditta" alt="Immagine del profilo">
+                        </div>
+                        <div class=" col-md-9 col-xs-12">
+                            <h3 class="media-heading" id="nome_ditta"><%= @company.name %></h3>
+							<hr>
+                            <div id="descrizione_ditta" class="text-justify"><%= @company.description %></div>
+							<hr>
+						</div>
+						<div class="col-md-12 content">
+						    <div class="col-md-8 col-xs-12 map-container">
+						        <h3>Dove Siamo</h3>
+						        <hr>
+						        <div class="map" id="map">
+						            
+						        </div>
+						        <div id="indirizzo_ditta" ><%= @company.address %></div>
+					        </div>
+					        <div class="col-md-4 col-xs-12 info-container">
+					            <h3>Orari</h3>
+					            <hr>
+					            <div id="orario_ditta" class="item"><span><i class="fa fa-clock-o" aria-hidden="true" ></i>Chiuso Ora</span></div>
+					            <h3>Contatti</h3>
+					            <hr>
+					            <div class="item"><i class="fa fa-internet-explorer" aria-hidden="true"></i><div id="web_ditta"><%= @company.website %></div></div>
+    						    <div class="item"><i class="fa fa-envelope" aria-hidden="true"></i><div id="mail_ditta"><%= @company.email %></div></div>
+    							<div class="item"><i class="fa fa-twitter" aria-hidden="true"></i><div id="social_ditta"><%= @company.social %></div></div>
+    							<div class="item"><i class="fa fa-phone" aria-hidden="true"></i><div id="telefono_ditta"><%= @company.phone %></div></div>
+    							
+    							<h3>Informazioni</h3>
+    							<hr>
+    							<h4 class="item"><i class="fa fa-info-circle"></i>Servizi offerti</h4>
+    							<p class="item">Promuovere e rivalorizzare i prodotti regionali di qualità. Km zero, direttamente dal produttore al consumatore. Produzione di formaggi caprini di qualità.</p>
+    							<h4 class="item"><i class="fa fa-info-circle"></i>Prodotti</h4>
+    							<p class="item">Prodotti caprini. Dalle caciotte alle robiole, formaggi stagionati di capra, ricotte, yogurt..</p>
+    							<hr>
+							</div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-md-12" id="modificaDittaContainer" style="display:none;">
+
+                    <form id="avatarForm" action="../php/set_ditta_logo.php" enctype="multipart/form-data" method="POST">
+                        <input type="file" name="avatar" id="avatar" accept="image/*">
+                        <input type="hidden" id="avatar_d_id" name="d_id_pass">
+                    </form>
+                    <br>
+                    <div><input id="nome_ditta_modifica" style="width: 100%;" placeholder="Nome della Impresa"/></div>
+                    <div><textarea id="descrizione_ditta_modifica" style="width: 100%;" class="text-justify" rows="5"></textarea></div>
+
+                    <div><input id="web_ditta_modifica" style="width: 100%;" placeholder="Sito web"/></div>
+                    <div><input id="mail_ditta_modifica" style="width: 100%;" placeholder="Mail"/></div>
+                    <div><input id="social_ditta_modifica" style="width: 100%;" placeholder="Link social"/></div>
+                    <div><input id="telefono_ditta_modifica" style="width: 100%;" placeholder="Telefono"/></div>
+                    <div><input id="indirizzo_ditta_modifica" style="width: 100%;" placeholder="Indirizzo"/></div>
+
+                </div>
+
+            </div>
+
+        </div>
+    <% else %>
+    
+        <div class="col-md-12 main utente">
+            <h2 class="page-header">
+                Profilo Utente
+            </h2>
+            
+            <div class="col-md-2 col-xs-12 profile-nav">
+                <ul class="links">
+                    <li class="profile-link">
+                        <a href="javascript:void(0)" onClick="switch_view('favorites')" class="link favorites-link profile-selection">Preferiti</a>
+                    </li>
+                    <hr>
+                    <li class="profile-link">
+                        <a href="javascript:void(0)"  onClick="switch_view('reviews')" class="link reviews-link" >Recensioni</a>
+                    </li>
+                    <hr>
+                    <li class="profile-link">
+                        <a href="javascript:void(0)"  onClick="switch_view('settings')" class="link settings-link">Impostazioni</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-10 col-xs-12 favorites-container tab tab-favorites">
+                <h3 class="fav-header"><i class="fa fa-star"></i>   I tuoi Preferiti</h3>
+                <% if @favorites.empty? %>
+                    <div class="no-favorites">
+                        <h3>Non hai ancora aggiunto prodotti ai tuoi Preferiti</h3>
+                    </div>
+                <% else %>
+                    <div class="owl-carousel" id="owl-carousel">
+                      
+                        <% @favorites.each do |f| %>
+                            <div>
+                                <div class="left-side">
+                                    <%= image_tag f.image %>
+                                </div>
+                              
+                                <div class="right-side">
+                                    
+                                        <h2><%= f.name %></h2>
+                                        <h4>Produttore: <strong><%= f.company.name %></strong></h4>
+                                        <h4>Regione: <strong><%= f.regione %></strong></h4>
+                                        <h4>Categoria: <strong><%= f.category %></strong></h4>
+                                    
+                                        <div class="links-container">
+                                            
+                                        
+                                            <%= link_to "<i class='fa fa-info-circle'></i>  Dettagli".html_safe , details_url(f.id, "info") , :class => 'btn btn-success' %>
+                                            <button class="btn btn-danger" onClick="delete_favorite(<%= f.id %>, <%= current_user.id %>) "><i class="fa fa-trash"></i>Rimuovi</button>    
+                                        </div>
+                                   
+                                </div>
+                            </div>
+                          
+                        <% end %>
+                    </div>
+                    	
+                        
+                <% end %>
+            </div>
+            <div class="col-md-10 col-xs-12 tab tab-reviews">
+                <h3 class="fav-header"><i class="fa fa-commenting"></i>   Le tue Recensioni</h3>
+                <% if @reviews.empty? %>
+                    <div class="jumbotron">
+                        Non hai ancora aggiunto recensioni
+                    </div>
+                <% else %>
+                
+                <% end %>
+            </div>
+            <div class="col-md-10 col-xs-12 tab tab-settings">
+                <h3 class="fav-header"><i class="fa fa-address-card"></i>   Impostazioni</h3>
+            </div>
+        </div>
+    
+    <% end %>
+</div>
+
+<script>
+    function delete_favorite(id, user){
+		$.ajax({
+            type: "POST",
+            data: JSON.stringify({	product_id: id,
+            						user_id: user
+            }),
+            contentType: "application/json; charset=utf-8",
+            url: "/products/delete_favorite/",
+            dataType: 'JSON',
+            success: function(data) {
+            	
+            	window.location.href = "/home"
+            }
+			
+	});	
+	}
+</script>
+
+<script>
+    
+    function switch_view(view){
+        $('.tab').hide();
+        $('.link').removeClass('profile-selection');
+        $('.'+view+'-link').addClass('profile-selection');
+        $('.tab-'+view).show();
+	
+    }
+</script>

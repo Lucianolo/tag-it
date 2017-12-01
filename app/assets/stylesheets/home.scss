@@ -1,0 +1,374 @@
+// Place all the styles related to the home controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.edit_buttons{
+    display: none;
+}
+
+.product_details_image{
+    border: 1px solid #eee;
+	padding: 20px;
+	text-align: center;
+	border-radius: 10px;
+
+}
+
+.product_details_data{
+    padding: 20px;
+}
+#reviews_page_container{
+    margin-top: 50px;
+}
+
+.product_details_name{
+    font-size: 30px;
+    color: #555;
+}
+
+.tabs{
+    padding: 0;
+    margin-top: 30px;
+}
+
+.tabs a{
+    color: #555;
+    font-weight: 500;
+    padding: 5px;
+}
+
+.divider{
+    border-right: 1px solid #555;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.selected{
+    background: #4dda65;
+    color: white !important;
+}
+
+.selected:hover{
+    color: #555 !important;
+}
+
+#main{
+    margin-bottom: 80px;
+}
+
+.product_info_left{
+    padding: 30px;
+    background-color: #ffd;
+}
+
+.product_info_text{
+    font-weight: 400;
+    color: #555;
+    padding-left: 10px;
+}
+
+.product_info .map{
+    height: 237px;
+}
+
+.add-review-label {
+    border-bottom: 1px solid #555;
+    font-weight: 500;
+    color: #555;
+}
+
+.add-review-text{
+    width: 80%;
+    height: 100px;
+    margin-top: 10px;
+    padding: 20px;
+}
+
+.add-review-button{
+    width: 80%;
+}
+.add_review .form-group{
+    width: 100% !important;
+   
+    text-align: center;
+}
+
+.add_review{
+    background-color: #ffe;
+    padding: 20px;
+}
+
+.add_review .rating{
+    width: 150px !important;
+    
+}
+
+
+
+.star-container{
+    position: relative;
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.star-container img{
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+
+
+.star-number{
+    opacity: 0;
+    position: absolute;
+    width: 100%;
+    color: #fff;
+    left: 0;
+    bottom: 0;
+    font-weight: 700;
+    z-index: 2;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    background-color: rgba(0,0,0,.7);
+    -webkit-transition: opacity .3s ease-in-out;
+    transition: opacity .3s ease-in-out;
+}
+
+.star-container:hover .star-number{
+    opacity: 1;
+}
+
+.reviews{
+    list-style: none;
+    padding-left: 0;
+}
+
+.reviews_list{
+    margin-bottom: 50px;
+}
+
+.review-item{
+    border-bottom: 0 solid #eeeeee;
+    background: #f9f9f9 none repeat scroll 0 0;
+    margin-bottom: 10px;
+    padding: 0 10px 30px;
+    position: relative;
+    -webkit-transition: all 300ms ease 0s;
+    transition: all 300ms ease 0s;
+    min-height: 120px;
+}
+
+.review-data{
+    
+    position: relative;
+}
+
+.review-user{
+    border-right: 1px solid #FFF;
+    height: 120px;
+}
+
+.review-image{
+    margin-top: 20px;
+    margin-left: 40px;
+    border: 1px solid #eee;
+    border-radius: 40px;
+}
+
+.reviews .hidden-text-rating{
+    display: none;
+}
+
+.review-user-name, .review-date{
+    color: #303030;
+    font-size: 17px;
+    text-transform: capitalize;
+    font-family: sans-serif;
+    padding-top: 10px;
+}
+
+.reviews .rating{
+    margin-top: 10px;
+    text-align: center;
+}
+
+.review-text{
+    background: #ffd;
+    margin: 10px;
+    padding: 20px;
+    border-radius: 20px;
+    vertical-align: middle;
+    
+}
+
+.hidden-review{
+    display:none;
+}
+
+#product-text-rating{
+    cursor: default;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.product-rating a{
+    font-size: 18px;
+    font-weight: 500;
+    color: rgb(77, 218, 101) !important;
+}
+#product-rating-background{
+    width: 140px;
+}
+
+.page-header {
+    color: #555;
+    font-size: 30px;
+    
+}
+
+#aggiungiProdottoContainer, #modificaProdottoContainer{
+    color: #555;
+}
+
+#aggiungiProdottoContainer textarea, #modificaProdottoContainer textarea{
+    font-size: 18px;
+    padding: 10px;
+    height: 185px;
+}
+
+#aggiungiProdottoContainer .col-md-6, #modificaProdottoContainer .col-md-6{
+    margin-top: 40px;
+}
+
+#avatarForm{
+    margin-bottom: 20px;
+}
+
+.carousel{
+    width: 100%;
+}
+
+.carousel img{
+    border-radius: 5px;
+}
+
+.carousel .img-container{
+    width: 35%;
+    float: left;
+}
+
+.owl-carousel{
+    text-align: center;
+   
+}
+
+.owl-item {
+   
+}
+.left-side{
+    width: 30%;
+    float: left;
+    display: inline-block;
+}
+
+.right-side{
+    width: 70%;
+    float: right;
+    display: inline-block;
+    padding: 50px;
+}
+
+.right-side h4{
+    margin-bottom: 20px;
+    color: #555;
+}
+
+.right-side h2{
+    margin-bottom: 20px;
+    color: #555;
+}
+
+.fav-header{
+    font-size: 25px;
+    background: #eee;
+    border-radius: 20px;
+    color: #555;
+    text-align: center;
+    margin: 0 auto;
+}
+
+@media (min-width: 1000px) {
+.actions{
+    position: absolute;
+    right: 0;
+    bottom: 50px;
+    text-align: right;
+}
+.left-side{
+    padding: 50px;
+}
+.right-side{
+    padding: 50px;
+}
+}
+
+@media (max-width: 600px){
+    .left-side img{
+        width: 220px;
+    }
+    
+    .right-side{
+        padding: 0;
+        padding-top: 10px;
+        padding-left: 20px;
+    }
+}
+.actions a, .actions button{
+    
+    display: inline-block;
+}
+
+.links-container{
+  
+}
+
+.profile-nav{
+    border: 1px solid #4dda65;
+    border-radius: 10px;
+}
+
+.links{
+    list-style: none;
+    padding: 0;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.profile-link{
+    display: block;
+    
+}
+
+.profile-link a{
+    font-weight: 500;
+    font-size: 18px;
+    color: #555;
+    padding: 10px;
+    
+}
+
+.profile-link a:hover{
+    color: #4dda65;
+}
+
+.profile-selection{
+    color: #4dda65 !important;
+}
+
+.tab-reviews, .tab-settings{
+    display: none;
+}

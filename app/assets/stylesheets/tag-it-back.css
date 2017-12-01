@@ -1,0 +1,361 @@
+body{
+	color: #333333;
+}
+
+.navbar{
+	background: #4dda65;
+}
+
+.navbar_bottom_custom{
+	min-height: 50px;
+}
+
+.container_bottom_custom{
+	margin-top: 15px;
+	margin-left: 50px;
+	color: #fff;
+}
+
+.container_bottom_custom a{
+	color: #fff;
+	text-decoration: underline;
+}
+.container_bottom_custom a:active{
+	color: #fff;
+	text-decoration: underline;
+}
+.container_bottom_custom a:hover{
+	color: #fff;
+	text-decoration: underline;
+}
+
+.editable-click{
+	border-bottom-width: 0px;
+}
+
+#contenitore_ditta{
+	margin-bottom: 10px;
+	padding-bottom: 10px;
+}
+
+#contenitore_prodotti{
+	margin-bottom: 10px;
+	padding-bottom: 10px;
+	border-bottom: 1px solid #eee;
+}
+
+
+/* ICTINNOVA STYLESHEET */
+
+
+/* NAVBAR */ 
+
+.navbar{
+	min-height: 60px;
+}
+
+
+
+.navbar-right a{
+	border-radius: 10px;
+	background-color: transparent !important;
+	color: white !important;
+}
+
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover{
+	color: #4dda65 !important;
+	background-color: white !important;
+	
+}
+
+/* PROFILO PRODUTTORE */
+
+#loader_div {
+	
+	position: fixed; 
+	z-index: 9999; 
+	background-color: white;
+	top: 50%;
+	left: 50%;
+
+}
+
+.content{
+	padding-left: 0;
+	padding-right: 0;
+	padding-top: 2em;
+}
+
+.content .col-md-5, .content .col-md-7{
+	
+}
+.map-container h3{
+	margin-top: 10px;
+}
+.map{
+	width: 100%;
+	height: 300px;
+	background-color: green;
+}
+
+.info-container h3{
+	text-align: center;
+	margin-top: 10px;
+}
+
+.info-container .fa {
+	padding-right: 10px;
+}
+
+.info-container .item{
+	padding-left: 10px;
+}
+
+.item div{
+	display: inline-block;
+	color: #555;
+	padding-bottom: 5px;
+}
+
+.info-container p {
+	font-size: 13px;
+	color: #555;
+}
+
+#DittaContainer{
+	padding-left: 0;
+	padding-right: 0;
+}
+
+
+
+/* PRODOTTI */
+
+
+
+.filters{
+
+	border: 1px solid #eee;
+	border-radius: 20px;
+	height: 320px;
+	padding: 20px;
+}
+
+.filters h3{
+	margin-top: 0;
+}
+@media (min-width: 1000px) {
+  .filters {
+    position: fixed;
+    top: 185px;
+    /*background-color: #67be61;*/
+    background: rgb(77, 218, 101);
+		color: #fff;
+		width: 20%;
+	-webkit-transition-property: top, bottom;
+  	-webkit-transition-duration: 0.5s;
+  }
+  
+   .rating-col{
+ 	width: 48%;
+ 	padding-right: 0;
+ 	}
+ 	
+ 
+}
+
+.filters hr{
+	padding-bottom: 10px !important;
+}
+.filters div{
+	padding: 0 10px;
+}
+
+.filters select{
+	width: 100%;
+	background-color: white;
+	height: 30px;
+	margin-bottom: 10px;
+	border-radius: 10px;
+	padding-left: 15px;
+	padding-right: 15px;
+	color: #555;
+    outline: none;
+}
+
+.media-heading .col-md-8, .media-heading .col-md-4{
+	padding: 0;
+}
+
+.description{
+	padding: 8px;
+    background: #ffd;
+    border-radius: 10px;
+    margin-top: 12px;
+    font-size: 13px;
+}
+
+#contenitoreImmagine{
+	height: 100%;
+    vertical-align: middle;
+    padding-top: 20px;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+#contenitoreImmagine img{
+	width: 100%;
+	max-width: 180px;
+}
+
+
+@media (max-width: 1000px){
+	#contenitoreImmagine img{
+		margin: 0 auto;
+	}
+	.prodotto .produttore {
+ 		margin-left: 0 !important;
+ 	}
+}
+
+.prodotto_regione{
+	font-size: 1px;
+	line-height: 0;
+	display: inherit;
+}
+.rating {
+  border: 0;
+  position: relative;
+  vertical-align: top;
+  width: 120px;
+  padding: 0;
+  display: inline-block;
+} 
+.cornerimage {
+  border: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+ } 
+ .rating img{
+   max-width: 120px;
+ }
+ 
+
+ .hidden-text-rating{
+ 	cursor: pointer;
+ 	display: inline-block;
+ 	color: rgb(77, 218, 101);
+ 	font-size: 18px;
+ 	padding-left: 10px;
+ 	font-weight: 500;
+ }
+
+.media-heading{
+	margin: 0 0;
+}
+
+.media-heading h3{
+	margin-top: 0;
+}
+
+.categoria{
+	text-align: center;
+    border: 1px solid rgb(77, 218, 101);
+    border-radius: 20px;
+    background: rgb(77, 218, 101);
+    color: #fff;
+}
+
+.media-heading .btn{
+	font-size: 10px;
+}
+
+.subheading {
+	padding: 0;
+}
+
+@media(max-width: 768px){
+	.subheading .col-xs-12 {
+  	text-align: center;
+  }
+}
+
+.subheading .col-md-3, .subheading .col-xs-12{
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+/* STATS */
+
+
+
+
+/* ACCOUNT UTENTE SEMPLICE */ 
+
+/* INDEX */
+
+
+/* PRODOTTI */ 
+
+.prodotto .produttore{
+	text-align: center;
+	border: 1px solid rgb(77, 218, 101);
+ 	border-radius: 20px;
+	color: #555;
+	margin-left: 10px;
+}
+
+
+/* RECENSIONI */
+
+.no-ratings{
+	display: none;
+	text-align: center;
+	height: 200px;
+	border-radius: 20px;
+	padding-top: 30px;
+	background-color: #eee;
+}
+
+.info{
+	
+	
+}
+
+.no-rating{
+	font-size: 24px;
+	font-weight: 500;
+	color: #555;
+	padding: 25px;
+	margin-bottom: 20px;
+}
+.recensioni{
+	padding-right: 0;
+	padding-left: 0;
+}
+.recensione {
+	
+	border-radius: 5px;
+	margin: 10px 0;
+	min-height: 100px;
+	color: white;
+}
+
+.r_info{
+	background-color: rgba(76, 218, 100, 0.2);
+	border-radius: 5px;
+	color: #444;
+	font-weight: 700;
+	padding-top: 30px;
+	min-height: 100px;
+	border-right: 1px solid white;
+	text-align: center;
+}
+
+.r_value{
+	background-color: rgba(76, 218, 100, 0.8);
+	border-radius: 5px;
+	min-height: 100px;
+}

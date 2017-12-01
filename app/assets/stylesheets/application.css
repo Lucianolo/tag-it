@@ -1,0 +1,42 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+
+ *= require_tree .
+ *= require_self
+ *= require owl.carousel
+ *= require owl.theme
+ */
+
+html{
+    overflow: -moz-scrollbars-vertical; 
+    overflow-y: scroll;
+}
+#main{
+    padding-top: 80px;
+    
+}
+
+.navbar{
+    background-color: #4dda65;
+}
+
+.fade{
+    opacity: 1;
+    padding-right: 0 !important;
+    margin: 0 !important;
+    padding-top: 30px !important;
+}
+
+.pull-right{
+    float: right;
+}

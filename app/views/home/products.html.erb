@@ -1,0 +1,349 @@
+
+<div class="row">
+
+	<div class="col-md-12 main">
+
+		<h2 class="page-header">
+			Elenco dei Prodotti
+			<% if @company %>
+				<span id="button_container" class="bottoni_ditta pull-right">
+					<button type="button" class="btn btn-default" onclick="aggiungiProdotto()">
+						<i class="fa fa-plus" aria-hidden="true"></i> Nuovo
+					</button>
+				</span>
+			<% end %>
+		</h2>
+		<div class="row" id="page_container">
+			<div class="col-md-12" >
+				<div class="col-md-3 col-xs-12 filters">
+					<h3>Filtra Per</h3>
+					<hr>
+					<div class="">
+						<h4>Tipologia</h4>
+						<select class="tipologia" id="filtro_tipologia" onchange="filtra_tipologia(this);">
+							<option>Tutte</option>
+							<option>Vino</option>
+							<option>Olio</option>
+							<option>Birra</option>
+							<option>Pasta</option>
+						</select>
+					</div>
+					<div class="utente">
+						<h4>Produttore</h4>
+						<select class="produttore" id="filtro_produttore" onchange="filtra_produttore(this);">
+							<option>Tutti</option>
+							
+							<option>ICTinnova</option>
+							
+						</select>
+					</div>
+					<div class="">
+						<h4>Regione</h4>
+						<select class="regione"  id="filtro_regione" onchange="filtra_regione(this);">
+							<option>Tutte</option>
+							<option>Lazio</option>
+							<option>Abruzzo</option>
+							<option>Altre Regioni</option>
+						</select>
+					</div>
+				</div>
+							
+				<div class="col-md-9 col-md-offset-3 col-xs-12" id="ProdottoContainer">
+						        <% @products.each do |product| %>
+							        <div class="row prodotto" id="row_prodotto_<%=product.id%>">
+							            <div class="media" id="contenitore_prodotti">
+							                <div class="col-md-3 col-xs-12" id="contenitoreImmagine">
+							                	<% if product.image %>
+							                    	<img class="media-object" src="<%=product.image %>" id="immagine_prodotto" alt="Immagine del prodotto">
+					                        	<% else %>
+					                        		<img class="media-object" src="/assets/no_image.jpg" id="immagine_prodotto" alt="Immagine del prodotto">
+					                        	<% end %>
+					                        </div>
+						                <div class="col-md-9 col-xs-12">
+						                    <div class="media-heading row">
+						                        <div class="col-md-8 col-xs-12" >
+						                            <h3 id="nome_prodotto_<%=product.id%>"><%= link_to product.name,  details_url(product.id, "info") %></h3>
+						                            <span class="prodotto_regione"><%= product.regione %></span>
+					                            </div>
+					                            <% if @company %>
+						                            <div class="col-md-4 col-xs-12 bottoni_ditta text-right" id="button_container<%=product.id%>" >
+						                                <div class="btn-group" role="group">
+						                                    <button type="button" class="btn btn-default" onclick="modificaProdotto(<%= product.id %>)">
+						                                        <i class="fa fa-pencil" aria-hidden="true"></i> Modifica</button>
+						                                    <button type="button" class="btn btn-danger" onclick="eliminaProdotto(<%= product.id %>)" data-toggle="modal" data-target="#eliminaModal">
+						                                        <i class="fa fa-trash" aria-hidden="true"></i> Elimina</button>
+						                                </div>
+						                            </div>
+					                            <% end %>
+					                            <% if current_user && !@company %>
+					                            	<div class="col-md-4 col-xs-12 bottoni_ditta text-right" id="button_container<%=product.id%>" >
+						                                <div class="btn-group" role="group">
+						                                	
+						                                	<% if !(current_user.favorites.include? product.id)  %>
+						                                    	<button type="button" class="btn btn-default" onclick="aggiungiPreferito(<%= product.id %>,<%= current_user.id %>)">
+						                                        <i class="fa fa-plus" aria-hidden="true"></i> Aggiungi ai Preferiti</button>
+						                                    <% else %>
+						                                    	<button type="button" class="btn btn-danger" onclick="eliminaPreferito(<%= product.id %>,<%= current_user.id %>)">
+						                                        <i class="fa fa-times" aria-hidden="true"></i> Rimuovi dai Preferiti</button>
+						                                    <% end %>
+						                                </div>
+						                            </div>
+						                        <% end %>
+					                        </div>
+					                        <div class="col-xs-12 subheading">
+					                            <div class="categoria col-md-3 col-xs-12"><%= product.category %></div>
+					                            <div class="col-md-3 col-xs-12 produttore"><%= product.company.name %></div>
+					                            <div class="col-md-6 col-xs-12 rating-col">
+					                                <div class="rating">
+					                                    <div>
+					                                        <img src="/assets/rating_empty.jpg" alt="img">
+					                                    </div>
+					                                    <div class="cornerimage" style="width: 50%;">
+					                                    	<img src="/assets/rating_full.jpg\">
+					                                    </div>
+					                                </div>
+					                                <% r = " #{product.rating_val }  ( #{ product.rating_count}" %>
+					                                <div class="hidden-text-rating product-rating"><%= link_to r , details_url(product.id, "recensioni") %><i class="fa fa-users"></i> )
+					                                </div>
+					                            </div>
+					                        </div>
+					                        <input type="hidden" id="tipologia_prodotto_<%= product.id %>" name="tipologia_prodotto_<%= product.id %>" value="<%= product.category %>">
+					                        <div id="descrizione_prodotto_<%= product.id %>" class="col-xs-12 text-justify  description"><%= product.description %></div>
+					                    </div>
+					                </div>
+					            </div>
+					            <script>
+					            	var w = (<%= product.rating_val %> * 100)/5.0;
+				
+									var elem = "#row_prodotto_<%= product.id %> .cornerimage";
+								
+									$(elem).css("width", w+"%");
+					            </script>
+							    <% end %>
+							</div>
+						</div>
+						
+						<% if @company %>
+						<div class="row" id="modificaProdottoContainer" style="display:none;">
+
+							
+							<div class="col-md-6 col-xs-12">
+								<form  class="col-xs-12" id="avatarForm" action="../php/set_prodotto_immagine.php" enctype="multipart/form-data" method="POST">
+									<label for="avatar">Immagine:</label>
+									<input type="file" name="avatar" id="avatar" accept="image/*">
+									<input type="hidden" id="avatar_p_id" name="p_id_pass">
+								</form>
+								<br>
+								<div class="form-group col-xs-12">
+									<label for="nome_prodotto_modifica">Nome:</label>
+									<input class="form-control" id="nome_prodotto_modifica" style="width: 100%;" placeholder="Nome del prodotto"/>
+								</div>
+								<div class="form-group col-xs-12">
+								  	<label for="tipologia_prodotto_modifica">Tipologia:</label>
+								  	<select class="form-control" id="tipologia_prodotto_modifica">
+								  		<option>Birra</option>
+									  	<option>Condimenti</option>
+									  	<option>Conserve</option>
+									  	<option>Dolci</option>
+									  	<option>Insaccati</option>
+									  	<option>Latticini</option>
+									  	<option>Olio</option>
+									  	<option>Ortofrutta</option>
+									  	<option>Pasta e Riso</option>
+									  	<option>Vino</option>
+								  	</select>
+								</div>
+							</div>
+							<div class="col-md-6 col-xs-12">
+								<div class="form-group col-xs-12">
+									<label for="descrizione_prodotto_modifica">Descrizione:</label>
+									<textarea class="form-control" id="descrizione_prodotto_modifica" style="width: 100%;" class="text-justify" rows="5"></textarea>
+								</div>
+							</div>
+							<div class="form-group" id="campiModifica"></div>
+
+
+						</div>
+
+						<div class="row" id="aggiungiProdottoContainer" style="display:none;">
+							<input type="hidden" value="<%= @company.id %>" id="hidden-id-ditta">
+							<!--form id="avatarFormNuovo" action="../php/add_prodotto_immagine.php" enctype="multipart/form-data" method="POST">
+								<label for="avatarNuovo">Immagine:</label>
+								<input type="file" name="avatar" id="avatarNuovo" accept="image/*">
+								<input type="hidden" id="avatar_p_idNuovo" name="p_id_pass">
+							</form>
+							<br-->
+							<div class="col-md-6 col-xs-12">
+								<div class="form-group col-xs-12">
+									<label for="nome_prodotto_aggiungi">Nome:</label>
+									<input class="form-control" id="nome_prodotto_aggiungi" style="width: 100%;" placeholder="Nome del prodotto"/>
+								</div>
+								<div class="form-group col-xs-12">
+								  	<label for="tipologia_prodotto_aggiungi">Tipologia:</label>
+								  	<select class="form-control" id="tipologia_prodotto_aggiungi">
+								  		<option>Birra</option>
+									  	<option>Condimenti</option>
+									  	<option>Conserve</option>
+									  	<option>Dolci</option>
+									  	<option>Insaccati</option>
+									  	<option>Latticini</option>
+									  	<option>Olio</option>
+									  	<option>Ortofrutta</option>
+									  	<option>Pasta e Riso</option>
+									  	<option>Vino</option>
+								  	</select>
+								</div>
+								<div class="form-group col-xs-12">
+									<label for="regione_prodotto_aggiungi">Regione:</label>
+								  	<select class="form-control" id="regione_prodotto_aggiungi">
+									  	<option>Lazio</option>
+									  	<option>Abruzzo</option>
+									  	<option>Altre Regioni</option>
+								  	</select>
+								</div>
+							</div>
+							<div class="col-md-6 col-xs-12">
+								<div class="form-group col-xs-12">
+									<label for="descrizione_prodotto_aggiungi">Descrizione:</label>
+									<textarea class="form-control" id="descrizione_prodotto_aggiungi" style="width: 100%;" class="text-justify" rows="5"></textarea>
+								</div>
+							</div>
+							
+							
+							<div class="form-group" id="campiAggiungi"></div>
+
+						</div>
+						<% end %>
+					</div>
+
+				</div>
+
+			</div>
+	
+		<!-- Modal -->
+		<div class="modal fade" id="eliminaModal" tabindex="-1" role="dialog" aria-labelledby="eliminaModalLabel">
+		  <div class="modal-dialog" role="document">
+			<div class="modal-content">
+			  <div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Annulla"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="eliminaModalLabel">Attenzione</h4>
+			  </div>
+			  <div class="modal-body">
+				Si sta per eliminare un prodotto. L'azione non è reversibile. Confermare l'operazione.
+			  </div>
+			  <div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Annulla</button>
+				<button type="button" class="btn btn-primary" id="eliminaButton">Ok</button>
+			  </div>
+			</div>
+		  </div>
+		</div>
+		
+<script type="text/javascript" >
+		function filtra_tipologia(val){
+			if(val.value == "Tutte"){
+				$('.prodotto').show();
+			} else {
+				$('.prodotto').each(function(){
+					
+					var tipologia = $(this).find('.categoria').text();
+					if(val.value != tipologia){
+						$(this).hide();
+					} else {
+						$(this).show();
+					}
+				});
+			}
+		}
+		
+		function filtra_produttore(val){
+			if(val.value == "Tutti"){
+				$('.prodotto').show();
+			} else {
+				$('.prodotto').each(function(){
+					
+					var tipologia = $(this).find('.produttore').text();
+					if(val.value != tipologia){
+						$(this).hide();
+					} else {
+						$(this).show();
+					}
+				});
+			}
+		}
+		
+		
+		function filtra_regione(val){
+			if(val.value == "Tutte"){
+				$('.prodotto').show();
+			} else {
+				$('.prodotto').each(function(){
+					
+					var regione = $(this).find('.prodotto_regione').text();
+					if(val.value != regione){
+						$(this).hide();
+					} else {
+						$(this).show();
+					}
+				});
+			}
+		}
+		
+		</script>
+		
+<script>
+if (matchMedia('only screen and (min-width: 1000px)').matches) {
+
+	$(window).scroll(function() {
+	    var scrollYpos = $(document).scrollTop();
+	   
+	    if (scrollYpos > 100) {
+	        $(".filters").css({
+	            'top': '80px',
+	            'position': 'fixed'
+	        });
+	    } else {
+	        $(".filters").css({
+	            'top': '185px',
+	            'position': 'fixed'
+	        });
+	    }
+	});
+}
+</script>
+
+<script>
+	function aggiungiPreferito(id, user){
+		$.ajax({
+            type: "POST",
+            data: JSON.stringify({	product_id: id,
+            						user_id: user
+            }),
+            contentType: "application/json; charset=utf-8",
+            url: "/products/add_favorite/",
+            dataType: 'JSON',
+            success: function(data) {
+            	
+            	window.location.href = "/prodotti"
+            }
+			
+	});	
+	}
+	
+	function eliminaPreferito(id, user){
+		$.ajax({
+            type: "POST",
+            data: JSON.stringify({	product_id: id,
+            						user_id: user
+            }),
+            contentType: "application/json; charset=utf-8",
+            url: "/products/delete_favorite/",
+            dataType: 'JSON',
+            success: function(data) {
+            	
+            	window.location.href = "/prodotti"
+            }
+			
+	});	
+	}
+</script>

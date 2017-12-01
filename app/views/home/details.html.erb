@@ -1,0 +1,292 @@
+
+<div class="row main" id="reviews_page_container">
+
+
+
+	<div class="col-md-5 col-xs-12 product_details_image">
+		<div class="product-image"><%= image_tag @product.image %></div>
+		
+	</div>
+	<div class="col-md-7 col-xs-12 product_details_data" >
+	    
+	    <h2 class="product_details_name"><%= @product.name %></h2>
+        <div class="rating" >
+            <div>
+    		    <img src="/assets/rating_empty_transparent.png" id="product-rating-background" >
+    		</div>
+    	    <div class="cornerimage" style="width: 50%;" id="product-rating">
+    		    <img src="/assets/rating_full_transparent.png">
+    	    </div>
+        </div>
+    	<div class="hidden-text-rating" id="product-text-rating"> <%= @product.rating_val %> ( <%= @product.rating_count %> <i class="fa fa-users"></i> )
+    	</div>
+    	<script>
+    	    var r = $('#product-text-rating').text().split(" (", 1)[0];
+    	    
+    		var percent = (r*100/5)-5
+    		$('#product-rating').css("width", percent+"%");
+        </script>	    
+	    <hr>
+	    <p class="product_retails_description"><%= @product.description %></p>
+		<div class="actual-rating"></div>
+		<div class="ratings" id="ratings">
+			    
+		</div>
+		<div class="no-ratings">
+		    <h3>
+			    Non ci sono recensioni per questo prodotto.
+			</h3>
+		</div>
+	</div>
+	
+	<div class="col-md-12 col-xs-12 tabs">
+	    <div class="tabs-heading">
+	        <a href="#" id="informazioni">Informazioni</a>
+	        <span class="divider"></span>
+	        <a href="#" id="recensioni">Recensioni</a>
+	    </div>
+	    <hr>
+	    <div class="product_info">
+	        <div class="product_info_left col-md-7 col-xs-12">
+    	        <label>Azienda Produttrice</label>
+    	        <p class="product_info_text">
+    	            <%= @product.company.name %>
+    	        </p>
+    	       
+    	        <label>Regione</label>
+    	         <p class="product_info_text">
+    	            <%= @product.regione %>
+    	        </p>
+    	       
+    	        <label>Categoria</label>
+    	         <p class="product_info_text">
+    	            <%= @product.category %>
+    	        </p>
+    	       
+	        </div>
+	        <div class="product_info_right col-md-5 col-xs-12">
+	            <div class="map">
+	                
+	            </div>
+	        </div>
+	    </div>
+	    <div class="product_reviews">
+	        <% if !@reviews.empty? %>
+    	        <div class="reviews_list col-md-12 col-xs-12">
+    	            <ul class="reviews">
+    	                <% @reviews.each do |review| %>
+    	                    <li class="review-item ">
+    	                        <div class="col-xs-2 review-user">
+    	                            <%= image_tag "/assets/author-7.jpg", :class => "review-image" %>
+    	                        </div>
+    	                        <div class="col-xs-10 review-data" id="review-<%= review.id %>">
+    	                            <div class="col-md-4 col-xs-12" >
+    	                                <div class="review-user-name"><%= review.user.email %></div>
+    	                                <div class="review-date"><%= review.created_at %></div>
+    	                                <div class="rating" >
+    					                    <div>
+    					                        <img src="/assets/rating_empty_transparent.png" >
+    					                    </div>
+    					                    <div class="cornerimage" style="width: 50%;">
+    					                        <img src="/assets/rating_full_transparent.png">
+    					                    </div>
+    					                </div>
+    					                
+    					                <div class="hidden-text-rating"> <%= review.rating %>
+    					                </div>
+    					                <script>
+    					                    
+    					                    
+    					                    var r = $('#review-<%= review.id %>').find('.hidden-text-rating').text();
+    					                    
+    					                    var percent = r*100/5
+    					                    
+    					                   
+    					                    $('#review-<%= review.id %>').find('.cornerimage').css("width", percent+"%");
+    					                </script>
+    	                            </div>
+    	                            <div class="col-md-8 col-xs-12">
+    	                                
+    	                            
+        	                            
+    					                <div class="review-text">
+    					                    <%= review.text %>
+    					                </div>
+					                </div>
+    	                        </div>
+    	                    </li>
+    	                <% end %>
+    	                <li class="review-item hidden-review">
+    	                        <div class="col-xs-2 review-user">
+    	                            <%= image_tag "/assets/author-7.jpg", :class => "review-image" %>
+    	                        </div>
+    	                        <div class="col-xs-10 review-data">
+    	                            <div class="col-md-4 col-xs-12">
+    	                                <div class="review-user-name"><%= current_user.email %></div>
+    	                                <div class="review-date" id="hidden-review-created_at"></div>
+    	                                <div class="rating">
+    					                    <div>
+    					                        <img src="/assets/rating_empty_transparent.png" >
+    					                    </div>
+    					                    <div class="cornerimage" id="hidden-corner-image" style="width: 50%;">
+    					                        <img src="/assets/rating_full_transparent.png">
+    					                    </div>
+    					                </div>
+    					                
+    					                <div class="hidden-text-rating" id="hidden-review-rating"> 
+    					                </div>
+    	                            </div>
+    	                            <div class="col-md-8 col-xs-12">
+    	                                
+    	                            
+        	                            
+    					                <div class="review-text" id="hidden-review-text">
+    					                    
+    					                </div>
+					                </div>
+    	                        </div>
+    	                    </li>
+    	            </ul>
+    	        </div>
+	        <% else %> 
+    	        <div class="no-rating col-md-12 col-xs-12">
+    	            Non ci sono ancora recensioni per questo prodotto.
+    	        </div>
+    	    <% end %>
+	        <div class="add_review col-md-6 col-md-offset-6 col-xs-12" id="form-group">
+	            <h3 class="add-review-label text-center">
+	                Lascia una recensione
+	            </h3>
+	            <div class="form-group">
+	                <div class="rating ">
+				        <figure class="star-container" onClick="setRating(1)">
+				            <img src="/assets/single_star_rating.png" alt="img">
+				            <p class="star-number" id="star-1">1</p>
+				        </figure>
+					    <figure class="star-container" onClick="setRating(2)">
+				            <img src="/assets/single_star_rating.png" alt="img">
+				            <p class="star-number" id="star-2">2</p>
+				        </figure>
+					    <figure class="star-container" onClick="setRating(3)">
+				            <img src="/assets/single_star_rating.png" alt="img">
+				            <p class="star-number" id="star-3">3</p>
+				        </figure>
+					    <figure class="star-container" onClick="setRating(4)">
+				            <img src="/assets/single_star_rating.png" alt="img">
+				            <p class="star-number" id="star-4">4</p>
+				        </figure>
+					    <figure class="star-container" onClick="setRating(5)">
+				            <img src="/assets/single_star_rating.png" alt="img">
+				            <p class="star-number" id="star-5">5</p>
+				        </figure>
+				</div>
+				<br>
+				<input type="hidden" id="stars-input" name="stars" value="">
+				<textarea name="review" placeholder="recensione" class="add-review-text" id="textarea-review-text"></textarea>
+				<br>
+				<button type="submit" class="btn btn-success add-review-button" onClick="addReview(<%= @product.id %>, <%= current_user.id %> )"><i class="fa fa-check"></i>  Invia</button>
+	            </div>
+	            
+	           
+	        </div>
+	    </div>
+	</div>
+
+
+</div>
+
+<% if @tab == "recensioni" %>
+
+<script>
+    $(document).ready(function() {
+        $('#recensioni').addClass("selected");
+        $('.product_info').hide();
+        $('.product_reviews').show();
+    });
+    
+</script>
+
+<% else %>
+
+<script>
+    $(document).ready(function() {
+        $('#informazioni').addClass("selected");
+        $('.product_reviews').hide();
+        $('.product_info').show();
+    });
+</script>
+
+<% end %>
+
+<script>
+    $('#informazioni').click(function(){
+        event.preventDefault;
+        if($('.product_info').css("display") == "block"){
+            return false;
+        } else {
+            $('.product_reviews').hide();
+            $('.product_info').show();
+            $(this).addClass("selected");
+            $('#recensioni').removeClass("selected");
+             return false;
+        }
+        
+    });
+    
+    $('#recensioni').click(function(){
+       
+        if($('.product_reviews').css("display") == "block"){
+            return false;
+        } else {
+            $('.product_info').hide();
+            $('.product_reviews').show();
+            $(this).addClass("selected");
+            $('#informazioni').removeClass("selected");
+             return false;
+        }
+       
+    });
+</script>
+
+
+<script>
+    var rating_selected = false;
+    function setRating(val){
+        var elem = $('#star-'+val)
+        $('.star-number').css("opacity", 0);
+        elem.css("opacity", 1);
+        $('#stars-input').val(val);
+        
+        return false;
+    }
+</script>
+
+<script>
+    function addReview(product, user){
+        var rating = $('#stars-input').val();
+        if(rating == ""){
+        	alert("Inserire una valutazione");
+        }
+        var text = $('.add-review-text').val();
+        $.ajax({
+            type: "POST",
+            data: JSON.stringify({user: user, rating: rating, text: text}),
+            contentType: "application/json; charset=utf-8",
+            url: "/products/"+product+"/add_review/",
+            dataType: 'JSON',
+            success: function(data) {
+                $('#hidden-review-created_at').text(data.created_at);
+                $('#hidden-review-rating').text(data.rating);
+                $('#hidden-review-text').text(data.text);
+                var r = (data.rating / 5) * 100
+                $('#hidden-corner-image').css("width", r+"%");
+                $('.hidden-review').show();
+                var percent = (data.product_rating*100/5)-5
+    		    $('#product-rating').css("width", percent+"%");
+    		    $('#product-text-rating').html(data.product_rating+' ( '+data.product_rating_count+' <i class="fa fa-users"></i> )');
+    			return false;
+            }
+        });
+        
+    }
+</script>
