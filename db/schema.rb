@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 20171109154258) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "companies", force: :cascade do |t|
     t.string "name"
     t.string "description"
@@ -21,7 +24,7 @@ ActiveRecord::Schema.define(version: 20171109154258) do
     t.string "social"
     t.string "phone"
     t.string "address"
-    t.integer "user_id"
+    t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_companies_on_user_id"
@@ -34,7 +37,7 @@ ActiveRecord::Schema.define(version: 20171109154258) do
     t.float "rating_val"
     t.integer "rating_count"
     t.string "regione"
-    t.integer "company_id"
+    t.bigint "company_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "category"
@@ -44,8 +47,8 @@ ActiveRecord::Schema.define(version: 20171109154258) do
   create_table "reviews", force: :cascade do |t|
     t.string "text"
     t.integer "rating"
-    t.integer "user_id"
-    t.integer "product_id"
+    t.bigint "user_id"
+    t.bigint "product_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["product_id"], name: "index_reviews_on_product_id"
