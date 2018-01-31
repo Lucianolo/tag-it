@@ -1,22 +1,20 @@
 development:
-  adapter: postgresql
-  database: my_database_development
+  adapter: sqlite3
+  database: db/development.sqlite3
   pool: 5
   timeout: 5000
-  template: template0
+  
   
 test:
-  adapter: postgresql
+  adapter: sqlite3
   database: my_database_test
   pool: 5
   timeout: 5000
-  template: template0
+ 
 
 production:
-  adapter: postgresql
+  adapter: sqlite3
   database: my_database_production
   pool: 5
   timeout: 5000
-  template: template0
-  username: bmthivanaahfby
-  password: b44b535d1bec81f940fd9f10ff405689ca9abc8edf39ffad9df96c3b9b64a6db
+  
